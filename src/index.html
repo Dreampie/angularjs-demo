@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable = no,minimal-ui"/>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="app" id="app" v-cloak>
+  <app-sidebar menus="{{menus}}"></app-sidebar>
+  <app-header tabs="{{tabs}}"></app-header>
+
+  <div class="main">
+    <router-view id="view" class="view" v-transition="view" transition-mode="out-in"></router-view>
+  </div>
+</div>
+<a id="back-top" href="javascript:void(0);"><i class="glyphicon glyphicon-chevron-up"></i></a>
+<script type="application/javascript" src="/dist/all.js"></script>
+</body>
+</html>
