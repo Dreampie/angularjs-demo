@@ -15,8 +15,8 @@ router = new VueRouter history: true
 #define routes
 router.map require './routes'
 
-VueResource = require 'vue-resource'
-Vue.use VueResource
+#VueResource = require 'vue-resource'
+#Vue.use VueResource
 
 # global before
 # you can perform async rejection here
@@ -32,6 +32,10 @@ App = Vue.extend
   components:
     'app-header': require './component/header'
     'app-sidebar': require './component/sidebar'
+  events:
+    'init-view': (data)->
+      this.$set 'menus',data.menus
+      this.$set 'tabs',data.tabs
 
 router.start App, '#app'
 
