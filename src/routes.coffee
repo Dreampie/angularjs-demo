@@ -2,6 +2,8 @@
 
 module.exports =
   '/hotwords':
-    component: require './view/hotword'
+    component: require './view/hotwords'
+  '/signin':
+    component: require './view/sign_in'
   '*':
-    component: require './view/notfound'
+    component: require './view/not_found'

@@ -34,8 +34,9 @@ App = Vue.extend
     'app-sidebar': require './component/sidebar'
   data: ->
     'menus': [
+      {'name': '登录', 'icon': 'glyphicon glyphicon-header', 'url': '/signin'},
       {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
-      {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/a'}
+      {'name': '无', 'icon': 'glyphicon glyphicon-header', 'url': '/a'}
     ]
     'tabs': []
   events:
@@ -43,8 +44,8 @@ App = Vue.extend
       this.$set 'tabs', data.tabs
 
 router.start App, '#app'
-# just for debugging
-window.router = router
+
+console.log router
 
 $ = require 'jquery'
 
