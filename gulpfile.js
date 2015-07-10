@@ -61,7 +61,7 @@ gulp.task('webpack', function () {
       },
       resolve: {
         modulesDirectories: ['node_modules'],
-        extensions: ['', /*'css',*/'.less', '.js', '.coffee']
+        extensions: ['','.html', /*'css',*/'.less', '.js', '.coffee']
       },
       plugins: [new webpack.webpack.ResolverPlugin(new webpack.webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"]))]
     })).on('error', gutil.log)

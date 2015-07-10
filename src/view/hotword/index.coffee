@@ -1,7 +1,7 @@
 require './style'
 
 module.exports =
-  template: require './template.html'
+  template: require './template'
   ready: ->
     this.$dispatch 'init-view', menus: [
       {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
