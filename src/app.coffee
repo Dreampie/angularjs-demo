@@ -32,12 +32,19 @@ App = Vue.extend
   components:
     'app-header': require './component/header'
     'app-sidebar': require './component/sidebar'
+  data: ->
+    'menus': [
+      {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
+      {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/a'}
+    ]
+    'tabs': []
   events:
     'init-view': (data)->
-      this.$set 'menus',data.menus
-      this.$set 'tabs',data.tabs
+      this.$set 'tabs', data.tabs
 
 router.start App, '#app'
+# just for debugging
+window.router = router
 
 $ = require 'jquery'
 
