@@ -25,7 +25,7 @@ var url = require('url');
 var fs = require('fs');
 var path = require('path');
 
-var index = 'dist/index.html';
+var index = './index.html';
 
 http.createServer(function (req, res) {
   var pathname = url.parse(req.url).pathname;

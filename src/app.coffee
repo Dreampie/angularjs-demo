@@ -15,8 +15,8 @@ router = new VueRouter history: true
 #define routes
 router.map require './routes'
 
-#VueResource = require 'vue-resource'
-#Vue.use VueResource
+VueResource = require 'vue-resource'
+Vue.use VueResource
 
 # global before
 # you can perform async rejection here
@@ -33,6 +33,8 @@ App = Vue.extend
     'app-header': require './component/header'
     'app-sidebar': require './component/sidebar'
   data: ->
+    resource = this.$resource('/')
+    console.log resource
     'menus': [
       {'name': '登录', 'icon': 'glyphicon glyphicon-header', 'url': '/signin'},
       {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
