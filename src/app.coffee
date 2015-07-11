@@ -36,7 +36,7 @@ App = Vue.extend
     resource = this.$resource('/')
     console.log resource
     'menus': [
-      {'name': '登录', 'icon': 'glyphicon glyphicon-header', 'url': '/signin'},
+      {'name': '登录', 'icon': 'glyphicon glyphicon-header', 'url': '/'},
       {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
       {'name': '无', 'icon': 'glyphicon glyphicon-header', 'url': '/a'}
     ]
