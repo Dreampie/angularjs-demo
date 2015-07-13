@@ -4,52 +4,69 @@ NProgress = require 'nprogress'
 NProgress.configure trickle: false
 NProgress.start()
 
+$ = require 'jquery'
 require './app'
 
-Vue = require 'vue'
-VueRouter = require 'vue-router'
+#angular
+require 'angular'
+require 'angular-route'
+require './layout'
+require './view/home'
+require './view/error'
 
-Vue.use VueRouter
+angular.module 'app', ['ngRoute']
 
-router = new VueRouter history: true
-#define routes
-router.map require './routes'
+#config
+.config ($routeProvider, $locationProvider, $httpProvider) ->
+#use the HTML5 History API
+  $locationProvider.html5Mode(true)
+  #异常过滤
+  $httpProvider.interceptors.push ($rootScope, $q, $location) ->
+    request: (config)->
+      NProgress.start()
+      config
 
-VueResource = require 'vue-resource'
-Vue.use VueResource
+    response: (response)->
+      NProgress.done()
+      response
 
-# global before
-# you can perform async rejection here
-router.beforeEach (to, from, allow, deny)->
-  console.log "before : " + to.path + "," + from.path
+#    responseError: (response) ->
+#      switch response.status
+#        when 401 then $location.path '/'
+#        when 404 then $location.path '/errors/404'
+#        when 500 then $location.path '/errors/500'
+#      $q.reject(response)
 
-# global after
-router.afterEach (to, from)->
-  console.log "after : " + to.path + "," + from.path
+  $routeProvider
+  .when '/',
+    template: require './view/home/template'
+    controller: 'HomeCtrl'
+  .when '/errors/:code',
+    template: require './view/error/template'
+    controller: 'ErrorCtrl'
+  .otherwise
+      redirectTo: '/'
 
+.run ($rootScope, $location, $templateCache) ->
+  $rootScope.path = $location.path()
 
-App = Vue.extend
-  components:
-    'app-header': require './component/header'
-    'app-sidebar': require './component/sidebar'
-  data: ->
-    resource = this.$resource('/')
-    console.log resource
-    'menus': [
-      {'name': '登录', 'icon': 'glyphicon glyphicon-header', 'url': '/'},
-      {'name': '热词', 'icon': 'glyphicon glyphicon-header', 'url': '/hotwords'},
-      {'name': '无', 'icon': 'glyphicon glyphicon-header', 'url': '/a'}
-    ]
-    'tabs': []
-  events:
-    'init-view': (data)->
-      this.$set 'tabs', data.tabs
+  $rootScope.$on '$routeChangeStart', (e, target) ->
+    console.log '$routeChangeStart'
 
-router.start App, '#app'
+  $rootScope.$on '$routeChangeSuccess', (e, target) ->
+    $('html, body').animate({scrollTop: '0px'}, 400, 'linear')
+    $rootScope.path = $location.path()
 
-console.log router
+  $rootScope.$on '$routeChangeError', (e, target) ->
+    console.log '$routeChangeError'
 
-$ = require 'jquery'
+  $templateCache.put 'header.tpl.html', require './layout/header.tpl.html'
+  $templateCache.put 'footer.tpl.html', require './layout/footer.tpl.html'
+  $templateCache.put 'sidebar.tpl.html', require './layout/sidebar.tpl.html'
+
+#bootstrap
+angular.element(document).ready ->
+  angular.bootstrap(document, ['app', 'layout', 'view'])
 
 $ ->
 #scrollup
