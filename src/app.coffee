@@ -4,17 +4,22 @@ NProgress = require 'nprogress'
 NProgress.configure trickle: false
 NProgress.start()
 
-$ = require 'jquery'
 require './app'
 
 #angular
 require 'angular'
 require 'angular-route'
+require 'angular-resource'
+require 'angular-animate'
+
+#view
 require './layout'
 require './view/home'
 require './view/error'
+#component
+require './component/back-top'
 
-angular.module 'app', ['ngRoute']
+angular.module 'app', ['ngRoute', 'ngAnimate']
 
 #config
 .config ($routeProvider, $locationProvider, $httpProvider) ->
@@ -30,12 +35,12 @@ angular.module 'app', ['ngRoute']
       NProgress.done()
       response
 
-#    responseError: (response) ->
-#      switch response.status
-#        when 401 then $location.path '/'
-#        when 404 then $location.path '/errors/404'
-#        when 500 then $location.path '/errors/500'
-#      $q.reject(response)
+  #    responseError: (response) ->
+  #      switch response.status
+  #        when 401 then $location.path '/'
+  #        when 404 then $location.path '/errors/404'
+  #        when 500 then $location.path '/errors/500'
+  #      $q.reject(response)
 
   $routeProvider
   .when '/',
@@ -54,7 +59,7 @@ angular.module 'app', ['ngRoute']
     console.log '$routeChangeStart'
 
   $rootScope.$on '$routeChangeSuccess', (e, target) ->
-    $('html, body').animate({scrollTop: '0px'}, 400, 'linear')
+    angular.element('body,html').animate scrollTop: 0, 800, 'linear'
     $rootScope.path = $location.path()
 
   $rootScope.$on '$routeChangeError', (e, target) ->
@@ -66,17 +71,6 @@ angular.module 'app', ['ngRoute']
 
 #bootstrap
 angular.element(document).ready ->
-  angular.bootstrap(document, ['app', 'layout', 'view'])
-
-$ ->
-#scrollup
-  $("#back-top").click ->
-    $('html,body').animate scrollTop: '0px', 400, 'linear'
-
-  $(window).scroll ->
-    if $(window).scrollTop() > 200
-      $('#back-top').fadeIn 200
-    else
-      $('#back-top').fadeOut 200
+  angular.bootstrap(document, ['app', 'layout', 'view', 'component'])
 
 NProgress.done()
