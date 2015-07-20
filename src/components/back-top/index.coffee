@@ -1,6 +1,6 @@
 require './style'
 
-angular.module 'component', ['ngAnimate']
+angular.module 'components', ['ngAnimate']
 
 .directive 'backTop', ($window)->
   restrict: 'E'

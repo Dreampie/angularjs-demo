@@ -18,6 +18,7 @@ require './views/home'
 require './views/error'
 #component
 require './components/back-top'
+require './components/breadcrumb'
 
 angular.module 'app', ['ngRoute', 'ngAnimate']
 
@@ -71,6 +72,6 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 
 #bootstrap
 angular.element(document).ready ->
-  angular.bootstrap(document, ['app', 'layout', 'view', 'component'])
+  angular.bootstrap(document, ['app', 'layouts', 'views', 'components'])
 
 NProgress.done()
