@@ -1,0 +1,22 @@
+<div ng-controller="SidebarCtrl">
+
+  <ul class="nav nav-list">
+
+    <li ng-repeat="menu in menus" class="{{$first?'active':''}}" ng-init="menu.showSubmenus=menu.submenus.length>0">
+      <a href="{{menu.showSubmenus?'':menu.url}}" class="{{menu.showSubmenus?'dropdown-toggle':''}}">
+        <i class="fa fa-{{menu.icon}}"></i>
+        <span class="menu-text"> {{menu.name}} </span>
+        <b ng-if="menu.showSubmenus" class="arrow fa fa-angle-down"></b>
+      </a>
+      <ul ng-if="menu.showSubmenus" class="submenu">
+        <li ng-repeat="submenu in menu.submenus">
+          <a href="{{submenu.url}}">
+            <i class="fa fa-double-angle-right"></i>
+            {{submenu.name}}
+          </a>
+        </li>
+      </ul>
+    </li>
+
+  </ul>
+</div>

@@ -13,11 +13,11 @@ require 'angular-resource'
 require 'angular-animate'
 
 #view
-require './layout'
-require './view/home'
-require './view/error'
+require './layouts'
+require './views/home'
+require './views/error'
 #component
-require './component/back-top'
+require './components/back-top'
 
 angular.module 'app', ['ngRoute', 'ngAnimate']
 
@@ -44,10 +44,10 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 
   $routeProvider
   .when '/',
-    template: require './view/home/template'
+    template: require './views/home/template'
     controller: 'HomeCtrl'
   .when '/errors/:code',
-    template: require './view/error/template'
+    template: require './views/error/template'
     controller: 'ErrorCtrl'
   .otherwise
       redirectTo: '/'
@@ -65,9 +65,9 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
   $rootScope.$on '$routeChangeError', (e, target) ->
     console.log '$routeChangeError'
 
-  $templateCache.put 'header.tpl.html', require './layout/header.tpl.html'
-  $templateCache.put 'footer.tpl.html', require './layout/footer.tpl.html'
-  $templateCache.put 'sidebar.tpl.html', require './layout/sidebar.tpl.html'
+  $templateCache.put 'header.tpl.html', require './layouts/header.tpl.html'
+  $templateCache.put 'footer.tpl.html', require './layouts/footer.tpl.html'
+  $templateCache.put 'sidebar.tpl.html', require './layouts/sidebar.tpl.html'
 
 #bootstrap
 angular.element(document).ready ->

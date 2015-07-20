@@ -20,7 +20,8 @@ module.exports = [
         {test: /\.coffee/, loader: 'coffee'},
         {test: /\.html$/, loader: "html"},
         {test: /\.(woff|woff2)$/, loader: "url?limit=10000&minetype=application/font-woff"},
-        {test: /\.(eot|svg|ttf)$/, loader: "file"}
+        {test: /\.(eot|svg|ttf)$/, loader: "file"},
+        {test: /\.(png|jpg|gif)$/, loader: "url-loader"}
       ]
     },
     resolve: {
