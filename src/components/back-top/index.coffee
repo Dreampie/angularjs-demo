@@ -16,4 +16,4 @@ angular.module 'components', ['ngAnimate']
 
     #click event
     element.on 'click', (evt) ->
-      angular.element('body,html').animate scrollTop: 0, 800,'linear'
+      angular.element('body,html').animate scrollTop: 0, 1000, 'linear'
