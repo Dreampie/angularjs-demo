@@ -2,8 +2,8 @@ var webpack = require("webpack");
 var version = require("../package.json").version;
 var banner =
   "/**\n" +
-  " * acfun-api-cms v" + version + "\n" +
-  " * https://git.acfun.tv/wangrenhui/acfun-api-cms\n" +
+  " * angular-demo v" + version + "\n" +
+  " * https://github.com/Dreampie/angular-demo\n" +
   " * Released under the MIT License.\n" +
   " */\n";
 
