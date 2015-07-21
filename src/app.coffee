@@ -19,6 +19,8 @@ require './views/error'
 require './views/forceversion'
 #component
 require './components/back-top'
+require './components/breadcrumb'
+require './components/alert-bar'
 
 angular.module 'app', ['ngRoute', 'ngAnimate']
 
@@ -63,7 +65,7 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
     console.log '$routeChangeStart'
 
   $rootScope.$on '$routeChangeSuccess', (e, target) ->
-    angular.element('body,html').animate scrollTop: 0, 800, 'linear'
+    angular.element('body,html').animate scrollTop: 0, 1000, 'linear'
     $rootScope.path = $location.path()
 
   $rootScope.$on '$routeChangeError', (e, target) ->
@@ -75,6 +77,5 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 
 #bootstrap
 angular.element(document).ready ->
-  angular.bootstrap(document, ['app', 'layout', 'view', 'component'])
-
-NProgress.done()
+  angular.bootstrap(document, ['app', 'layouts', 'views', 'components'])
+  NProgress.done()

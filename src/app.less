@@ -84,33 +84,6 @@ body {
         line-height: 40px;
         padding: 0 12px 0 0;
         display: block;
-        .breadcrumb {
-          background-color: transparent;
-          display: inline-block;
-          margin: 0 22px 0 12px;
-          padding: 0;
-          font-size: 13px;
-          color: #333;
-          border-radius: 0;
-          .fa-home {
-            margin-left: 4px;
-            margin-right: 2px;
-            font-size: 20px;
-            position: relative;
-            top: 2px;
-          }
-          > li {
-            display: inline-block;
-            > a {
-              display: inline-block;
-              padding: 0 4px;
-              color: #4c8fbd;
-            }
-          }
-          li, li.active {
-            color: #555;
-          }
-        }
       }
       .view-content {
         background: #fff;
@@ -120,24 +93,39 @@ body {
     }
   }
 }
+
 .badge-info {
-  background-color: #3a87ad!important
+  background-color: #3a87ad !important
 }
+
 .badge-success {
-  background-color: #82af6f!important
+  background-color: #82af6f !important
 }
 
 .badge-primary {
-  background-color: #428bca!important
+  background-color: #428bca !important
 }
 
 .badge-danger {
-  background-color: #d15b47!important
+  background-color: #d15b47 !important
 }
 
 .badge-warning {
-  background-color: #f89406!important
+  background-color: #f89406 !important
 }
+
+#badge-message {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  z-index: 10;
+  display: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  text-align: left;
+}
+
 
 #nprogress {
   pointer-events: none;

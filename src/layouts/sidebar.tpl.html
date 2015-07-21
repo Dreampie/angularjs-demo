@@ -1,17 +1,18 @@
 <div ng-controller="SidebarCtrl">
 
-  <ul class="nav nav-list">
+  <ul class="nav nav-list" ng-if="menus.length>0">
 
-    <li ng-repeat="menu in menus" class="{{$first?'active':''}}" ng-init="menu.showSubmenus=menu.submenus.length>0">
-      <a href="{{menu.showSubmenus?'':menu.url}}" class="{{menu.showSubmenus?'dropdown-toggle':''}}">
+    <li ng-repeat="menu in menus" class="{{menu.active?'active':''}}" ng-init="menu.hasSubmenus=menu.submenus.length>0">
+      <a ng-click="toggleSubmenus($event)" ng-href="{{menu.hasSubmenus?'':menu.url}}"
+         class="{{menu.hasSubmenus?'dropdown-toggle':''}}">
         <i class="fa fa-{{menu.icon}}"></i>
         <span class="menu-text"> {{menu.name}} </span>
-        <b ng-if="menu.showSubmenus" class="arrow fa fa-angle-down"></b>
+        <b ng-if="menu.hasSubmenus" class="arrow fa fa-angle-down"></b>
       </a>
-      <ul ng-if="menu.showSubmenus" class="submenu">
-        <li ng-repeat="submenu in menu.submenus">
-          <a href="{{submenu.url}}">
-            <i class="fa fa-double-angle-right"></i>
+      <ul ng-if="menu.hasSubmenus" class="submenu {{menu.active?'active':''}}">
+        <li ng-repeat="submenu in menu.submenus" class="{{submenu.active?'active':''}}">
+          <a ng-href="{{submenu.url}}" ng-click="activeSubmenus($event)">
+            <i class="fa fa-angle-double-right"></i>
             {{submenu.name}}
           </a>
         </li>

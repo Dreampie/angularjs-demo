@@ -1,6 +1,6 @@
 require './style'
 
-angular.module 'view'
+angular.module 'views'
 
 #RootController
 .controller 'ErrorCtrl', ($scope, $routeParams)->

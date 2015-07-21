@@ -1,6 +1,6 @@
 require './style'
 
-angular.module 'view', ['ngResource']
+angular.module 'views', ['ngResource']
 
 #RootController
 .controller 'HomeCtrl', ($scope, $resource)->

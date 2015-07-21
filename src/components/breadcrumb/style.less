@@ -1,0 +1,31 @@
+@import '../../layouts/meta';
+
+.breadcrumbs {
+  .breadcrumb {
+    background-color: transparent;
+    display: inline-block;
+    margin: 0 22px 0 12px;
+    padding: 0;
+    font-size: 13px;
+    color: #333;
+    border-radius: 0;
+    .fa-home {
+      margin-left: 4px;
+      margin-right: 2px;
+      font-size: 20px;
+      position: relative;
+      top: 2px;
+    }
+    > li {
+      display: inline-block;
+      > a {
+        display: inline-block;
+        padding: 0 4px;
+        color: #4c8fbd;
+      }
+    }
+    li, li.active {
+      color: #555;
+    }
+  }
+}
