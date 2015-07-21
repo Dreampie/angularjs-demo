@@ -5,7 +5,7 @@ angular.module 'layouts', []
 .controller 'HeaderCtrl', ($scope)->
   $scope.name = 'This is header'
 
-.controller 'SidebarCtrl', ($scope,$route, $location)->
+.controller 'SidebarCtrl', ($scope, $route, $location)->
   $scope.url = $location.url()
   $scope.menus = [
     {icon: 'dashboard', name: '控制台', url: '/'},
@@ -42,22 +42,31 @@ angular.module 'layouts', []
     parent = target.parent()
     siblings = parent.siblings('li')
 
-    siblings.find('.submenu').slideUp('slow')
-    siblings.removeClass('active open')
 
-    parent.addClass('active open')
-    target.siblings('.submenu').slideDown('slow')
+    siblings.find('.submenu').stop().slideUp('slow', 'linear')
+    siblings.removeClass('open')
+    siblings.find('.submenu>li.active').removeClass('active')
+    # 有子菜单
+    if target.siblings('.submenu').length > 0
+      parent.addClass('open')
+      target.siblings('.submenu').stop().slideDown('slow', 'linear')
+    else
+      siblings.removeClass('active open')
+      parent.addClass('active')
 
     false
 
-  $scope.activeSubmenus=($event)->
+  $scope.activeSubmenus = ($event)->
     target = angular.element($event.target)
     parent = target.parent()
     siblings = parent.siblings('li')
 
     siblings.removeClass('active')
-    parent.parents('ul.nav-list>li').siblings().find('.submenu>li.active').removeClass('active')
+    pparent = parent.parents('ul.nav-list>li')
+    pparent.siblings().removeClass('active open')
+    pparent.siblings().find('.submenu>li.active').removeClass('active')
     parent.addClass('active')
+    pparent.addClass('active open')
 
     false
 .controller 'FooterCtrl', ($scope)->

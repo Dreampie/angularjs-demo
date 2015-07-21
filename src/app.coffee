@@ -73,5 +73,4 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 #bootstrap
 angular.element(document).ready ->
   angular.bootstrap(document, ['app', 'layouts', 'views', 'components'])
-
-NProgress.done()
+  NProgress.done()

@@ -2,7 +2,7 @@ require './style'
 
 angular.module 'components'
 
-.directive 'breadcumb', ($rootScope,$location)->
+.directive 'breadcrumb', ($rootScope,$location)->
   restrict: 'E'
   template: require './template'
   replace: true
