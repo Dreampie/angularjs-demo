@@ -1,5 +1,5 @@
-<div ng-controller="ForceVersionList">
-    <ul class="active">
+<div ng-controller="ForceVersionList" class="ACTIVE">
+    <ul class="force">
         <li>ID</li>
         <li>客户端名称</li>
         <li>强制更新状态</li>
@@ -7,14 +7,16 @@
         <li>需升级版本</li>
         <li>操作</li>
     </ul>
-    <ul ng-repeat="item in items"  class="active">
+    <ul ng-repeat="item in items" class="force">
+        <li>{{item.id}}</li>
+        <li>{{item.clientName}}</li>
+        <li>{{item.status==1?"开":"关"}}</li>
+        <li>{{item.appVersionInfoDto.version}}</li>
+        <li>{{item.sourceVersion}}</li>
         <li>
-            <li>{{item.id}}</li>
-            <li>{{item.clientType}}</li>
-            <li>{{item.status}}</li>
-            <li>{{item.destVersion}}</li>
-            <li>{{item.sourceVersion}}</li>
-            <li>{{item.opration}}</li>
+            <a href="#">修改</a>
+            <a href="#">版本管理</a>
         </li>
     </ul>
+    {{sss}}
 </div>
