@@ -11,7 +11,9 @@ angular.module 'components'
       msg: message.msg
       keep: message.keep || false
       close: (alert, $event)->
-        target = angular.element($event.target).parents('.alert-bar')
+        target = angular.element($event.target)
+        if target.parents('.alert-bar').length > 0
+          target = target.parents('.alert-bar')
         target.animate left: '-' + target.width() + 'px', 1000, 'linear'
         index = $rootScope.alerts.indexOf(alert)
         if !alert.keep
