@@ -1,0 +1,20 @@
+<div ng-controller="ForceVersionList">
+    <ul class="active">
+        <li>ID</li>
+        <li>客户端名称</li>
+        <li>强制更新状态</li>
+        <li>目标版本</li>
+        <li>需升级版本</li>
+        <li>操作</li>
+    </ul>
+    <ul ng-repeat="item in items"  class="active">
+        <li>
+            <li>{{item.id}}</li>
+            <li>{{item.clientType}}</li>
+            <li>{{item.status}}</li>
+            <li>{{item.destVersion}}</li>
+            <li>{{item.sourceVersion}}</li>
+            <li>{{item.opration}}</li>
+        </li>
+    </ul>
+</div>
