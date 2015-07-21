@@ -15,4 +15,4 @@ views是所有的界面，每个view新建一个文件夹，里面包含三个�
 
 components 是所有的组件，公有的业务组件 例如：回到顶部，验证码等通过angular directive实现的通用业务组件
 
-factory 组件直接写在
+factory 组件直接写在相应的index.coffee中
