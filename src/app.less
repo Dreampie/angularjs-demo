@@ -10,7 +10,7 @@ ul {
 }
 
 html {
-  min-height: 100%;
+  height: 100%;
   position: relative;
 }
 
@@ -18,7 +18,7 @@ body {
   z-index: 0;
   padding-bottom: 0;
   background-color: #e4e6e9;
-  min-height: 100%;
+  height: 100%;
   font-family: 'Open Sans';
   font-size: 13px;
   color: #393939;
@@ -47,8 +47,10 @@ body {
 .main-container {
   position: static;
   padding: 0;
+  height: 100%;
   .main-container-inner {
     position: relative;
+    height: 100%;
     .sidebar {
       width: 190px;
       float: left;
@@ -74,7 +76,6 @@ body {
       margin-left: 190px;
       margin-right: 0;
       margin-top: 0;
-      min-height: 100%;
       padding: 0;
       .breadcrumbs {
         position: relative;
@@ -86,6 +87,7 @@ body {
         display: block;
       }
       .view-content {
+        height: 100%;
         background: #fff;
         margin: 0;
         padding: 8px 20px 24px;
@@ -113,19 +115,6 @@ body {
 .badge-warning {
   background-color: #f89406 !important
 }
-
-#badge-message {
-  position: fixed;
-  bottom: 24px;
-  left: 0;
-  z-index: 10;
-  display: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  text-align: left;
-}
-
 
 #nprogress {
   pointer-events: none;
