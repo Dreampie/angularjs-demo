@@ -54,7 +54,7 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
   .otherwise
       redirectTo: '/'
 
-.run ($rootScope, $location, $templateCache) ->
+.run ($rootScope, $location, $templateCache,Alert) ->
   $rootScope.path = $location.path()
 
   $rootScope.$on '$routeChangeStart', (e, target) ->
@@ -63,6 +63,7 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
   $rootScope.$on '$routeChangeSuccess', (e, target) ->
     angular.element('body,html').animate scrollTop: 0, 1000, 'linear'
     $rootScope.path = $location.path()
+    Alert.add  type: 'warning', msg: '测试', keep: false
 
   $rootScope.$on '$routeChangeError', (e, target) ->
     console.log '$routeChangeError'

@@ -1,6 +1,6 @@
-<div id="alert-bar">
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <a class="close"><span>×</span></a>
-    <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
+<div class="alert-bar">
+  <div class="alert alert-{{alert.type}} alert-dismissible" role="alert">
+    <a ng-if="!alert.keep" class="close" ng-click="alert.close(alert,$event)"><span>×</span></a>
+    {{alert.msg}}
   </div>
 </div>

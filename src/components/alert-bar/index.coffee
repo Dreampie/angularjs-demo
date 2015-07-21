@@ -2,11 +2,35 @@ require './style'
 
 angular.module 'components'
 
-.directive 'alertBar', ()->
+.factory 'Alert', ($rootScope, $timeout)->
+  $rootScope.alerts = []
+
+  add: (message)->
+    alert =
+      type: message.type
+      msg: message.msg
+      keep: message.keep || false
+      close: (alert, $event)->
+        target = angular.element($event.target).parents('.alert-bar')
+        target.animate left: '-' + target.width() + 'px', 1000, 'linear'
+        index = $rootScope.alerts.indexOf(alert)
+        if !alert.keep
+          $timeout ->
+            $rootScope.alerts.splice(index, 1)
+          , 1200
+
+    $rootScope.alerts.push(alert)
+
+.directive 'alertBar', ($timeout)->
   restrict: 'E'
   template: require './template'
   replace: true
+  scope:
+    alert: '=alert'
   link: (scope, element, attrs) ->
-    element.on 'click', (evt) ->
-      angular.element(element).animate left: '-' + angular.element(element).width(), 1000, 'linear'
-      false
+    target = angular.element(element)
+    target.css left: '-' + target.width() + 'px', display: 'block'
+    target.animate left: 0, 1000, 'linear'
+    $timeout ->
+      scope.alert.close scope.alert, target: element
+    , 5000
