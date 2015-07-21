@@ -16,7 +16,6 @@ require 'angular-animate'
 require './layouts'
 require './views/home'
 require './views/error'
-require './views/forceversion'
 #component
 require './components/back-top'
 require './components/breadcrumb'
@@ -52,9 +51,6 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
   .when '/errors/:code',
     template: require './views/error/template'
     controller: 'ErrorCtrl'
-  .when '/version',
-      template: require './views/forceversion/forceVersionList'
-      controller: 'ErrorCtrl'
   .otherwise
       redirectTo: '/'
 
