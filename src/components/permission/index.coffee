@@ -19,16 +19,16 @@ angular.module 'components'
 .factory 'Session', ($rootScope) ->
 #  $rootScope.session = {}
   $rootScope.session =
-    key: '123',
+    token: '123',
     user: {username: 'xx', fullname: '管理员', avator: require '../../assets/avatars/avatar.png'}
     permissions: ['P_USERS']
 
   put: (session)->
-    $rootScope.session = {key: session.key, user: session.user, permissions: session.permissions}
+    $rootScope.session = {token: session.token, user: session.user, permissions: session.permissions}
   remove: ->
     $rootScope.session = {}
-  key: ->
-    $rootScope.session.key
+  token: ->
+    $rootScope.session.token
   user: ->
     $rootScope.session.user
   permissions: ->

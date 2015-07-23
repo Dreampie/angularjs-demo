@@ -29,9 +29,12 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 #use the HTML5 History API
   $locationProvider.html5Mode(true)
   #异常过滤
-  $httpProvider.interceptors.push ($rootScope, $q, $location) ->
+  $httpProvider.interceptors.push ($rootScope, $q, $location,Session) ->
     request: (config)->
       NProgress.start()
+      # 如果token存在 使用token来 授权请求
+      if Session.token()
+        config.headers['x-session-token'] = Session.token()
       config
 
     response: (response)->
