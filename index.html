@@ -12,7 +12,9 @@
 
 <body>
 <!--alert-bar-->
-<alert-bar ng-repeat="alert in alerts" alert="alert"></alert-bar>
+<div class="alert-bars">
+  <alert-bar ng-repeat="alert in alerts" alert="alert"></alert-bar>
+</div>
 <!--header-->
 <div ng-include="'header.tpl.html'"></div>
 <!--content-->

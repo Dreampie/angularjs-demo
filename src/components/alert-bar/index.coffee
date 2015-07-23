@@ -19,7 +19,7 @@ angular.module 'components'
         if !alert.keep
           $timeout ->
             $rootScope.alerts.splice(index, 1)
-          , 1200
+          , 1000
 
     $rootScope.alerts.push(alert)
 

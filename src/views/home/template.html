@@ -1,4 +1,13 @@
 <div ng-controller="HomeCtrl">
   {{name}}
   <a href="/errors/400">xx</a>
+  <input ng-model="user.username" value="">
+  <a ng-click="hh(user)">xxxxxxxxxx</a>
+
+  <ul has-permission="P_XX">
+    <li ng-repeat="user in users">
+      {{user.name}}
+    </li>
+  </ul>
+  {{permissions}}
 </div>
