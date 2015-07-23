@@ -29,7 +29,7 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 #use the HTML5 History API
   $locationProvider.html5Mode(true)
   #异常过滤
-  $httpProvider.interceptors.push ($rootScope, $q, $location,Session) ->
+  $httpProvider.interceptors.push ($rootScope, $q, $location, Session) ->
     request: (config)->
       NProgress.start()
       # 如果token存在 使用token来 授权请求
@@ -56,19 +56,19 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
     template: require './views/error/template'
     controller: 'ErrorCtrl'
   .otherwise
-    redirectTo: '/'
+      redirectTo: '/'
 
 .run ($rootScope, $location, $templateCache, Alert, Permission) ->
   $rootScope.path = $location.path()
 
   $rootScope.$on '$routeChangeStart', (event, next, current) ->
-    if Permission.authed()
-      if !Permission.match('GET', next.originalPath)
+    if !Permission.match('GET', next.originalPath)
+      if Permission.authed()
         Alert.add type: 'danger', msg: '您没有权限访问该路径'
         $location.path('/errors/403')
-    else
-      Alert.add type: 'danger', msg: '您还没有登录'
-      $location.path('/')
+      else
+        Alert.add type: 'danger', msg: '您还没有登录'
+        $location.path('/')
 
   $rootScope.$on '$routeChangeSuccess', (event, next) ->
     angular.element('body,html').animate scrollTop: 0, 1000, 'linear'

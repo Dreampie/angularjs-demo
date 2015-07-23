@@ -17,7 +17,7 @@ angular.module 'components'
       pattStart++
 
 .factory 'Session', ($rootScope) ->
-#  $rootScope.session = {}
+  # $rootScope.session = {}
   $rootScope.session =
     token: '123',
     user: {username: 'xx', fullname: '管理员', avator: require '../../assets/avatars/avatar.png'}
@@ -50,20 +50,19 @@ angular.module 'components'
     has
 
 .factory 'Permission', ($rootScope, Session, PathMatcher)->
-#需要权限的url
+  # 需要权限的url
   $rootScope.permissions = [
-    {method: 'POST', value: 'P_USERS', url: '/users/**'}
+    {method: '*', value: 'P_USERS', url: '/users/**'}
   ]
   # 是否已认证
   authed: ->
     Session.user()
 
-# 当前用户是否有该url的访问权限 如果全局权限没有该路径 返回true
+  # 当前用户是否有该url的访问权限 如果全局权限没有该路径 返回true
   match: (method, url)->
     for permission in $rootScope.permissions
       if (permission.method == '*' || permission.method == method) && PathMatcher.match(permission.url, url)
         return Session.hasPermissions permission.value
-
     true
 
   has: (values)->
