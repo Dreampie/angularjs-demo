@@ -2,10 +2,13 @@ require './style'
 
 angular.module 'layouts', []
 #LayoutController
-.controller 'HeaderCtrl', ($scope,$location, Session)->
+.controller 'HeaderCtrl', ($scope, $location, $route, Session)->
   $scope.logout = ->
     Session.remove()
-    $location.path('/')
+    if $location.path() == '/'
+      $route.reload()
+    else
+      $location.path('/')
 
 .controller 'SidebarCtrl', ($scope, $route, $location)->
   $scope.url = $location.url()

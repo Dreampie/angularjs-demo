@@ -16,14 +16,12 @@ angular.module 'components'
         return false
       pattStart++
 
-.factory 'Session',($rootScope) ->
+.factory 'Session', ($rootScope) ->
 #  $rootScope.session = {}
   $rootScope.session =
     key: '123',
     user: {username: 'xx', fullname: '管理员', avator: require '../../assets/avatars/avatar.png'}
-    permissions: [
-      {method: 'POST', value: 'P_USERS', url: '/users/**'}
-    ]
+    permissions: ['P_USERS']
 
   put: (session)->
     $rootScope.session = {key: session.key, user: session.user, permissions: session.permissions}
@@ -35,32 +33,41 @@ angular.module 'components'
     $rootScope.session.user
   permissions: ->
     $rootScope.session.permissions
+# 当前用户是否拥有该权限值
+  hasPermissions: (values)->
+    has = false
+    if values && values.length > 0 && $rootScope.session.permissions && $rootScope.session.permissions.length > 0
+      for permission in $rootScope.session.permissions
+        i = 0
+        for value in values
+          if permission.toLowerCase() == value.toLowerCase()
+            values.splice i, 1
+            i--
+        i++
+
+      if values.length == 0
+        has = true
+    has
 
 .factory 'Permission', ($rootScope, Session, PathMatcher)->
-  $rootScope.permissions = Session.permissions()
+#需要权限的url
+  $rootScope.permissions = [
+    {method: 'POST', value: 'P_USERS', url: '/users/**'}
+  ]
   # 是否已认证
   authed: ->
     Session.user()
 
-# 当前用户是否有该url的访问权限
+# 当前用户是否有该url的访问权限 如果全局权限没有该路径 返回true
   match: (method, url)->
     for permission in $rootScope.permissions
       if (permission.method == '*' || permission.method == method) && PathMatcher.match(permission.url, url)
-        return true
+        return Session.hasPermissions permission.value
 
-# 当前用户是否拥有该权限值
+    true
+
   has: (values)->
-    for permission in $rootScope.permissions
-      i = 0
-      for value in values
-        if permission.value.toLowerCase() == value.toLowerCase()
-          values.splice i, 1
-          i--
-      i++
-    if values.length > 0
-      false
-    else
-      true
+    Session.hasPermissions(values)
 
   remove: (element)->
     angular.element(element).remove()
