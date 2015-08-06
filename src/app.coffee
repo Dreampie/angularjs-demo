@@ -28,25 +28,30 @@ angular.module 'app', ['ngRoute', 'ngAnimate']
 .config ($routeProvider, $locationProvider, $httpProvider) ->
 #use the HTML5 History API
   $locationProvider.html5Mode(true)
+  $httpProvider.defaults.timeout = 500
   #异常过滤
-  $httpProvider.interceptors.push ($rootScope, $q, $location, Session) ->
+  $httpProvider.interceptors.push ($rootScope, $q, $location,Alert) ->
     request: (config)->
       NProgress.start()
-      # 如果token存在 使用token来 授权请求
-      if Session.token()
-        config.headers['x-session-token'] = Session.token()
       config
+
+    requestError: (request)->
+      NProgress.done()
+      Alert.add type:'danger',msg:'网络错误'
+      $q.reject(request)
 
     response: (response)->
       NProgress.done()
       response
 
-  #    responseError: (response) ->
-  #      switch response.status
-  #        when 401 then $location.path '/'
-  #        when 404 then $location.path '/errors/404'
-  #        when 500 then $location.path '/errors/500'
-  #      $q.reject(response)
+    responseError: (response) ->
+      NProgress.done()
+      Alert.add type:'danger',msg:'网络错误'
+      #      switch response.status
+      #        when 401 then $location.path '/'
+      #        when 404 then $location.path '/errors/404'
+      #        when 500 then $location.path '/errors/500'
+      $q.reject(response)
 
   $routeProvider
   .when '/',
